@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Win32建立一个简单的窗体 | Welcome to Maxine&#39;s world</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#include #include/因为VS里的很多字符编码都是采用unicode来编码的，为了兼容字符集。微软开发了tchar包，tchar 在unicode下是wchar（双字符），而普通是char。 因为C++支持两种字符串，即常规的ANSI编码和Unicode编码，这样对应的就有了两套字符串字符串处理函数///声明窗口函数LRESULT CALLBACK WindowProc(HWND h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win32建立一个简单的窗体">
+<meta property="og:url" content="http://Maxine1.github.io/2017/07/10/Win32WindowsForm/index.html">
+<meta property="og:site_name" content="Welcome to Maxine&#39;s world">
+<meta property="og:description" content="#include #include/因为VS里的很多字符编码都是采用unicode来编码的，为了兼容字符集。微软开发了tchar包，tchar 在unicode下是wchar（双字符），而普通是char。 因为C++支持两种字符串，即常规的ANSI编码和Unicode编码，这样对应的就有了两套字符串字符串处理函数///声明窗口函数LRESULT CALLBACK WindowProc(HWND h">
+<meta property="og:updated_time" content="2017-07-10T15:10:55.705Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Win32建立一个简单的窗体">
+<meta name="twitter:description" content="#include #include/因为VS里的很多字符编码都是采用unicode来编码的，为了兼容字符集。微软开发了tchar包，tchar 在unicode下是wchar（双字符），而普通是char。 因为C++支持两种字符串，即常规的ANSI编码和Unicode编码，这样对应的就有了两套字符串字符串处理函数///声明窗口函数LRESULT CALLBACK WindowProc(HWND h">
+  
+    <link rel="alternate" href="/atom.xml" title="Welcome to Maxine&#39;s world" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Welcome to Maxine&#39;s world</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://Maxine1.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Win32WindowsForm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/10/Win32WindowsForm/" class="article-date">
+  <time datetime="2017-07-09T16:03:02.000Z" itemprop="datePublished">2017-07-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Win32建立一个简单的窗体
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#include<windows.h></windows.h></p>
+<p>#include<tchar.h>/<em>因为VS里的很多字符编码都是采用unicode来编码的，为了兼容字符集。微软开发了tchar包，tchar 在unicode下是wchar（双字符），而普通是char。 因为C++支持两种字符串，即常规的ANSI编码和Unicode编码，这样对应的就有了两套字符串字符串处理函数</em>/<br>//声明窗口函数<br>LRESULT CALLBACK WindowProc(HWND hwnd,UNIT uMsg,WPARAM,wParam,LPARAM lparam);/<em>LRESULT是一个数据类型,指的是从窗口程序或者回调函数返回的32位值。CALLBACK，回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用为调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。WindowProc,该函数是一个应用程序定义的函数。它处理发送给窗口的消息。WINDPROC类型定义了一个指向该回调函数的指针。WindowProc是用于应用程序定义函数的占位符。</em>/<br>//函数说明<br>int WINAPI WinMain(<br>    HINSTANCE hInstance,<br>    HINSTANCE hPrevInatance,<br>    LPSTR lpCmdLine,<br>    int nCmdShow<br>)/<em>WinMain函数是所有Windows应用程序的入口，类似c语言中的main函数 其功能是完成一系列的定义和初始化，并产生消息循环. WinMain函数实现以下功能：注册窗口类，建立窗口及执行其他必要的初始化工作；进入消息循环，根据从应用程序消息队列接受的消息，调用相应的处理过程；当消息循环检<br>测到WM_QUIT消息是终止程序运行。WinMain函数有三个基本部分组成：函数说明、初始化和消息循环 </em>/<br>/<em>窗口类定义，窗口类定义了窗口的形式与功能窗口类定义通过给窗口类数据结构WNDCLASS赋值完成，该数据结构中包含窗口类的各种属性</em>/<br>{<br>    WNDCLASS wndclass;/<em>结构WNDCLASS包含一个窗口类的全部信息，也是Windows编程中使用的基本数据结构之一，应用程序通过定义一个窗口类确定窗口的属性</em>/<br>    wndclass.lpfnWndProc = WindowProc; //定义窗口处理函数<br>    wndclass.cbClsExtra = 0;//窗口类无拓展<br>    wndclass.cbWndExtra = 0;//窗口类实例无拓展<br>    wndclass.style = CS_HREDRAW | CS_VREDRAW;// 窗口类型<br>    wndclass.lpszClassName = _T(“我的窗体”);//窗口类名<br>    wndclass.hInstance = hInstance;//当前实例句柄<br>    wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);//窗口光标<br>    wndclass.hIcon = 0;////窗口的最小化的图标<br>    wndclass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);//窗口背景<br>    wndclass.lpszMenuName = 0;//窗口无菜单<br>    /<em>注册窗口类，Windows系统本身提供部分预定义的窗口类，程序员也可以自定义窗口类。窗口类必须先注册 后使用 </em>/<br>    if (RegisterClass(&amp;wndclass) == 0)//如果注册失败 发出警告<br>    {<br>        MessageBox(0, _T(“注册窗口类失败”), _T(“我的窗体”), MB_OK);<br>        return 0;<br>    }<br>    //创建窗口实列,创建一个窗口的实例由函数CreateWindow()实现<br>    HWND hWnd = CreateWindow(_T(“我的窗体”),//窗口类名<br>     _T(“我的第一个窗体”),//窗口标题名<br>     WS_OVERLAPPEDWINDOW,//窗口的风格<br>     100, 100,  //窗口左上角坐标值<br>     500, 400,  //窗口的高和宽<br>     0, //此窗口无父窗口<br>     0,//此窗口无子菜单<br>     hInstance,//创建此窗口的应用程序的当前句柄<br>     0//不使用该值<br>     );<br>    //显示和更新窗口<br>    ShowWindow(hWnd, SW_SHOW);<br>    UpdateWindow(hWnd);<br>    //消息循环<br>    MSG msg;<br>    while (GetMessage(&amp;msg, 0, 0, 0))<br>    {<br>        TranslateMessage(&amp;msg);<br>        DispatchMessage(&amp;msg);<br>    //return Msg.wParam; 消息循环结束 即程序结束时 将信息返回系统<br>    }<br>    return 0;<br>}<br>/<em>定义窗口函数。窗口函数定义了应用程序对接收到的不同消息的响应，其中包含了应用程序对各种可能接受到的消息的处理过程，时消息处理分支控制语句的集合 </em>/<br>LRESULT CALLBACK WindowProc(<br>    HWND hwnd,<br>    UINT uMsg,<br>    WPARAM wParam,<br>    LPARAM IParam<br>)<br>{<br>    switch (uMsg)<br>    {<br>    case WM_CLOSE:<br>        PostQuitMessage(0);<br>        break;<br>    default://缺省时采用系统消息缺省处理函数<br>        return DefWindowProc(hwnd, uMsg, wParam, IParam);<br>    }<br>    return 0;<br>}<br>/<em>在vs打开时，可以点击单词然后按F1连网查看该单词的解释、功能、类别等信息。右键可以查看该单词的定义</em>/<br>完整代码如下：<br>/*</tchar.h></p>
+<p>#include<windows.h></windows.h></p>
+<p>#include<tchar.h><br>//声明窗口函数<br>LRESULT CALLBACK WindowProc(HWND hwnd,<br>    UINT uMsg,<br>    WPARAM wParam,<br>    LPARAM lparam<br>);<br>int WINAPI WinMain(<br>    HINSTANCE hInstance,<br>    HINSTANCE hPrevInatance,<br>    LPSTR lpCmdLine,<br>    int nCmdShow<br>)<br>{<br>    WNDCLASS wndclass;<br>    wndclass.lpfnWndProc = WindowProc;<br>    wndclass.cbClsExtra = 0;<br>    wndclass.cbWndExtra = 0;<br>    wndclass.style = CS_HREDRAW | CS_VREDRAW;<br>    wndclass.lpszClassName = _T(“我的窗体”);<br>    wndclass.hInstance = hInstance;<br>    wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);<br>    wndclass.hIcon = 0;<br>    wndclass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);<br>    wndclass.lpszMenuName = 0;<br>    //注册窗口类<br>    if (RegisterClass(&amp;wndclass) == 0)<br>    {<br>        MessageBox(0, _T(“注册窗口类失败”), _T(“我的窗体”), MB_OK);<br>        return 0;<br>    }<br>    //创建窗口实列<br>    HWND hWnd = CreateWindow(_T(“我的窗体”), _T(“我的第一个窗体”), WS_OVERLAPPEDWINDOW, 100, 100, 500, 400, 0, 0, hInstance, 0);<br>    //显示和更新窗口<br>    ShowWindow(hWnd, SW_SHOW);<br>    UpdateWindow(hWnd);<br>    //消息循环<br>    MSG msg;<br>    while (GetMessage(&amp;msg, 0, 0, 0))<br>    {<br>        TranslateMessage(&amp;msg);<br>        DispatchMessage(&amp;msg);<br>    }<br>    return 0;<br>}<br>//定义窗口函数<br>LRESULT CALLBACK WindowProc(<br>    HWND hwnd,<br>    UINT uMsg,<br>    WPARAM wParam,<br>    LPARAM IParam<br>)<br>{<br>    switch (uMsg)<br>    {<br>    case WM_CLOSE:<br>        PostQuitMessage(0);<br>        break;<br>    default:<br>        return DefWindowProc(hwnd, uMsg, wParam, IParam);<br>    }<br>    return 0;<br>}<br>*/</tchar.h></p>
+<p>#include<windows.h></windows.h></p>
+<p>#include<tchar.h><br>//声明窗口函数<br>LRESULT CALLBACK WindowProc(HWND hwnd,<br>    UINT uMsg,<br>    WPARAM wParam,<br>    LPARAM lparam<br>);<br>int WINAPI WinMain(<br>    HINSTANCE hInstance,<br>    HINSTANCE hPrevInatance,<br>    LPSTR lpCmdLine,<br>    int nCmdShow<br>)<br>{<br>    WNDCLASS wndclass;<br>    wndclass.lpfnWndProc = WindowProc;<br>    wndclass.cbClsExtra = 0;<br>    wndclass.cbWndExtra = 0;<br>    wndclass.style = CS_HREDRAW | CS_VREDRAW;<br>    wndclass.lpszClassName = _T(“我的窗体”);<br>    wndclass.hInstance = hInstance;<br>    wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);<br>    wndclass.hIcon = 0;<br>    wndclass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);<br>    wndclass.lpszMenuName = 0;<br>    //注册窗口类<br>    if (RegisterClass(&amp;wndclass) == 0)<br>    {<br>        MessageBox(0, _T(“注册窗口类失败”), _T(“我的窗体”), MB_OK);<br>        return 0;<br>    }<br>    //创建窗口实列<br>    HWND hWnd = CreateWindow(_T(“我的窗体”), _T(“我的第一个窗体”), WS_OVERLAPPEDWINDOW, 100, 100, 500, 400, 0, 0, hInstance, 0);<br>    //显示和更新窗口<br>    ShowWindow(hWnd, SW_SHOW);<br>    UpdateWindow(hWnd);<br>    //消息循环<br>    MSG msg;<br>    while (GetMessage(&amp;msg, 0, 0, 0))<br>    {<br>        TranslateMessage(&amp;msg);<br>        DispatchMessage(&amp;msg);<br>    }<br>    return 0;<br>}<br>//定义窗口函数<br>LRESULT CALLBACK WindowProc(<br>    HWND hwnd,<br>    UINT uMsg,<br>    WPARAM wParam,<br>    LPARAM IParam<br>)<br>{<br>    switch (uMsg)<br>    {<br>    case WM_CLOSE:<br>        PostQuitMessage(0);<br>        break;<br>    default:<br>        return DefWindowProc(hwnd, uMsg, wParam, IParam);<br>    }<br>    return 0;<br>}<br>/<em>详细内容请参考<a href="http://www.baike.com/wiki/wndclass和http://www.jb51.net/article/49424.htm" target="_blank" rel="external">http://www.baike.com/wiki/wndclass和http://www.jb51.net/article/49424.htm</a></em>/</tchar.h></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://Maxine1.github.io/2017/07/10/Win32WindowsForm/" data-id="cj4yb3nkw000038uukvvwjoh1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/10/win32消息机制/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          win32消息机制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/08/WindowsMessageMechanism/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">WindowsMessageMechanism</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/10/win32消息机制/">win32消息机制</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/10/Win32WindowsForm/">Win32建立一个简单的窗体</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/08/WindowsMessageMechanism/">WindowsMessageMechanism</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/07/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Maxine<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

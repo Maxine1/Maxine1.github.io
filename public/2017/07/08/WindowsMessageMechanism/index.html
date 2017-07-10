@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>WindowsMessageMechanism | Welcome to Maxine&#39;s world</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天了解了一下Windows的消息机制，就随便写写文章。消息，就是指Windows发出的一个通知，告诉应用程序某个事情发生了。例如，单击鼠标、改变窗口尺寸、按下键盘上的一个键都会使Windows发送一个消息给应用程序。消息本身是作为一个记录传递给应用程序的，这个记录（一般在 C/C++/汇编中称为“结构体”）中包含了消息的类型以及其他信息。例如，对单击鼠标所产生的消息来说，这个记录（结构体）中包含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WindowsMessageMechanism">
+<meta property="og:url" content="http://Maxine1.github.io/2017/07/08/WindowsMessageMechanism/index.html">
+<meta property="og:site_name" content="Welcome to Maxine&#39;s world">
+<meta property="og:description" content="今天了解了一下Windows的消息机制，就随便写写文章。消息，就是指Windows发出的一个通知，告诉应用程序某个事情发生了。例如，单击鼠标、改变窗口尺寸、按下键盘上的一个键都会使Windows发送一个消息给应用程序。消息本身是作为一个记录传递给应用程序的，这个记录（一般在 C/C++/汇编中称为“结构体”）中包含了消息的类型以及其他信息。例如，对单击鼠标所产生的消息来说，这个记录（结构体）中包含">
+<meta property="og:updated_time" content="2017-07-08T13:04:13.857Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WindowsMessageMechanism">
+<meta name="twitter:description" content="今天了解了一下Windows的消息机制，就随便写写文章。消息，就是指Windows发出的一个通知，告诉应用程序某个事情发生了。例如，单击鼠标、改变窗口尺寸、按下键盘上的一个键都会使Windows发送一个消息给应用程序。消息本身是作为一个记录传递给应用程序的，这个记录（一般在 C/C++/汇编中称为“结构体”）中包含了消息的类型以及其他信息。例如，对单击鼠标所产生的消息来说，这个记录（结构体）中包含">
+  
+    <link rel="alternate" href="/atom.xml" title="Welcome to Maxine&#39;s world" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Welcome to Maxine&#39;s world</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://Maxine1.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-WindowsMessageMechanism" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/08/WindowsMessageMechanism/" class="article-date">
+  <time datetime="2017-07-08T12:56:01.000Z" itemprop="datePublished">2017-07-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WindowsMessageMechanism
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天了解了一下Windows的消息机制，就随便写写文章。<br>消息，就是指Windows发出的一个通知，告诉应用程序某个事情发生了。例如，单击鼠标、改变窗口尺寸、按下键盘上的一个键都会使Windows发送一个消息给应用程序。<br>消息本身是作为一个记录传递给应用程序的，这个记录（一般在 C/C++/汇编<br>中称为“结构体”）中包含了消息的类型以及其他信息。例如，对单击鼠标所产生的消息来说，这个记录（结构体）中包含了单击鼠标的消息号、单击鼠标时的坐标(由X,Y值连接而成的一个32位整数)。这个记录类型叫做TMsg。<br>在C语言中的定义是：<br>typedef struct Msg<br>{<br>HWND hwnd; / /窗口句柄<br>UINT message; / /消息常量标识符<br>WPARAM wParam; // 32位消息的特定附加信息<br>LPARAM lParam; // 32位消息的特定附加信息<br>DWORD time; / /消息创建时的时间<br>TPoint pt; / /消息创建时的鼠标位置<br>} TMsg;<br>typedef struct TPoint<br>{<br>int x;<br>int y;<br>}TPoint;<br>消息内容<br>hwnd<br>32位的窗口句柄。窗口可以是任何类型的屏幕对象，因为Win32能够维护大多数可视对象的句柄(窗口、对话框、按钮、编辑框等)。<br>message<br>用于区别其他消息的常量值，这些常量可以是Windows单元中预定义的常量，也可以是自定义的常量。<br>wParam<br>通常是一个与消息有关的常量值，也可能是窗口或控件的句柄。<br>lParam<br>通常是一个指向内存中数据的指针。<br>由于WParam、lParam和Pointer都是32位的，即等同于DWORD。因此，它们之间可以相互转换。<br>消息系统<br>Windows的消息系统是由3个部分组成的：<br>·消息队列。Windows能够为所有的应用程序维护一个消息队列。应用程序必须从消息队列中获取消息，然后分派给某个窗口。<br>·消息循环。通过这个循环机制应用程序从消息队列中检索消息，再把它分派给适当的窗口，然后继续从消息队列中检索下一条消息，再分派给适当的窗口，依次进行。<br>· 窗口过程。每个窗口都有一个窗口过程来接收传递给窗口的消息，它的任务就是获取消息然后响应它。窗口过程是一个回调函数；处理了一个消息后，它通常要返回一个值给Windows。<br>一个消息从产生到被一个窗口响应，其中有5个步骤：<br>1) 系统中发生了某个事件。<br>2) Windows把这个事件翻译为消息，然后把它放到消息队列中。<br>3)应用程序从消息队列中接收到这个消息，把它存放在TMsg记录中。<br>4)应用程序把消息传递给一个适当的窗口的窗口过程。<br>5) 窗口过程响应这个消息并进行处理。<br>步骤3和4构成了应用程序的消息循环。<br>消息实现<br>一.消息概述<br>Windows窗体是怎样展现在屏幕上的呢？众所周知，是通过API绘制实现的。Windows操作系统提供了一系列的API函数来实现界面的绘制功能，例如：<br>DrawText　绘制文字<br>DrawEdge　绘制边框<br>DrawIcon　绘制图标<br>Bitmap 绘制位图<br>Rectangle　绘制矩形<br>…<br>再复杂的程序界面都是通过这些函数来实现的。<br>我们需要一个控制中心，用来进行“发号施令”，我们还需要一个命令传达机制，将命令即时的传达到目的地。这个控制中心，就是一个动力源，就像一颗心脏，源源不断地将血液送往各处。这个命令传达机制就是Windows消息机制，Windows消息就好比是身体中的血液，它是命令传达的使者。<br>Windows消息控制中心一般是三层结构，其顶端就是Windows内核。Windows内核维护着一个消息队列，第二级控制中心从这个消息队列中获取属于自己管辖的消息，后做出处理，有些消息直接处理掉，有些还要发送给下一级窗体(Window)或控件（Control）。第二级控制中心一般是各Windows应用程序的Application对象。第三级控制中心就是Windows窗体对象，每一个窗体都有一个默认的窗体过程，这个过程负责处理各种接收到的消息。如下图所示：<br>Windows操作系统中包括以下几种消息：<br>1、标准Windows消息：<br>这种消息以WM_打头。<br>2、通知消息<br>通知消息是针对标准Windows控件的消息。这些控件包括：按钮(Button)、组合框(ComboBox)、编辑框(TextBox)、列表框（ListBox）、ListView控件、Treeview控件、工具条(Toolbar)、菜单（Menu）等。每种消息以不同的字符串打头。<br>3、自定义消息<br>编程人员还可以自定义消息。<br>二.句柄<br>不是每个控件都能接收消息，转发消息和绘制自身，只有具有句柄（handle）的控件才能做到。有句柄的控件本质上都是一个窗体(window)，它们可以独立存在，可以作为其它控件的容器，而没有句柄的控件，如Label，是不能独立存在的，只能作为窗口控件的子控件，它不能绘制自身，只能依靠父窗体将它绘制来。<br>由于有了句柄，窗体能够接收消息，也就知道了该什么时候绘制自己，绘制子控件，知道了鼠标在什么时候点击了窗口的哪个部分，从而作出相应的处理。句柄就好像是一个人的身份证，有了它，你就可以从事各种社会活动；否则的话，你要么是一个社会看不到的黑户，要么跟在别人后面，通过别人来证明你的存在。<br>三.消息传送<br>1、从消息队列获取消息：<br>可以通过PeekMessage或GetMessage函数从Windows消息队列中获取消息。Windows保存的消息队列是以线程(Thread)来分组的，也就是说每个线程都有自己的消息队列。<br>2、发送消息<br>发送消息到指定窗体一般通过以下两个函数完成：SendMessage和PostMessage。两个函数的区别在于：PostMessage函数只是向线程消息队列中添加消息，如果添加成功，则返回True,否则返回False，消息是否被处理，或处理的结果，就不知道了。而SendMessage则有些不同，它并不是把消息加入到队列里，而是直接翻译消息和调用消息处理(线程向自己发送消息才是这样)，直到消息处理完成后才返回。所以，如果我们希望发送的消息立即被执行，就应该调用SendMessage。<br>还有一点，就是SendMessage发送的消息由于不会被加入到消息队列中（错：线程向其他线程发送消息也是追加到其他线程的发送消息队列的，即使这两个线程在同一个进程也是如此），所以通过PeekMessage或GetMessage是不能获取到由SendMessage发送的消息。<br>另外，有些消息用PostMessage不会成功，比如wm_settext。所以不是所有的消息都能够用PostMessage的。<br>还有一些其它的发送消息API函数，如PostThreadMessage，SendMessageCallback，SendMessageTimeout，SendNotifyMessage等。<br>四.消息循环<br>消息循环是应用程序能够持续存在的根本原因。如果循环退出，则应用程序就结束了。<br>我们来看一看Delphi中封装的消息循环是怎样的：<br>第一步：程序开始运行(Run)<br>Application.Initialize;　//初始化<br>Application.CreateForm(TForm1, Form1);　//创建主窗体<br>Application.Run;　//开始运行，准备进行消息循环<br>如果不创建主窗体，应用程序同样可以存在和运行。<br>第二步：开始调用消息循环(HandleMessage)<br>第三步：消息循环中对消息的处理。<br>窗体过程实际上是一个回调函数。<br>以上内容更详细请百度。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://Maxine1.github.io/2017/07/08/WindowsMessageMechanism/" data-id="cj4yb3nl2000138uuacg9ejlf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/10/Win32WindowsForm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Win32建立一个简单的窗体
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/07/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/10/win32消息机制/">win32消息机制</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/10/Win32WindowsForm/">Win32建立一个简单的窗体</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/08/WindowsMessageMechanism/">WindowsMessageMechanism</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/07/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Maxine<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
